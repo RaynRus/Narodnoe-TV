@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<body>
+    <div class="navbar">
+        <a href="#">Профиль|Вход</a>
+        <a href="#">Рекомендации</a>
+        <a href="#">Подписки</a>
+        <a href="#">Музыка</a>
+        <a href="#">Выйти</a>
+        <h2>Народное-ТV</h2>
+    </div>
+    <div class="container">
+        <form action="/registration" method="post">
+            <h2>Регистрация</h2>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-contol" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" class="form-contol" id="password" name="password" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Повторите пароль</label>
+                <input type="password" class="form-contol" id="confirm_password" name="confirm_password">
+            </div>
+
+            <p>Уже есть аккаунт? Нажмите "Профиль|Вход"</p>
+            <button type="submit" class="btn btn-primary">Готово</button>
+        </form>
+    </div>
+</body>
+{% endblock %}
