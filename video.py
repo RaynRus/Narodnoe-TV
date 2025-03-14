@@ -37,7 +37,7 @@ class Video:
         con = sqlite3.connect(db_name)
         q = con.execute(SQL)
         data = q.fetchall()
-        return [Post(*row) for row in data]
+        return [Video(*row) for row in data]
 
     @staticmethod
     def get_by_author(author_id):
