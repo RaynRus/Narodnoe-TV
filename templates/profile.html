@@ -1,0 +1,62 @@
+<!-- Подключение базового шаблона -->
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-8">
+        <div class="card mt-5">
+            <div class="card-header">
+                Профиль пользователя
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Имя пользователя: {{ user.username }}</h5>
+                <p class="card-text">Количество видео: {{ video|length }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-8">
+        <h2 class="mb-3">Видео</h2>
+        <div class="modal-header">
+            <h5 class="modal-title" id="newPublicationModalLabel">Новое видео</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Заголовок</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="file_name" class="form-label">Видео файл</label>
+                <input type="file" class="form-control" id="file_name" name="file_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Текст публикации</label>
+                <textarea class="form-control" id="text" name="text" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+
+        <!-- Список карточек публикаций -->
+
+        {% for video in videos %}
+        <!-- Карточка одоного поста пользователя -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <video id="file_name" width="100%" height="auto" controls>
+                        <source src="/static/uploads/{{ video.file_name }}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+                    </video>
+                    <p class="card-text">{{ video.text }}</p>
+                    <p class="card-text text-fsecondary"> Дата публикации: {{ video.at_publish }}</p>
+                </div>
+            </div>
+        <!-- таких карточек много... -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -6,19 +6,22 @@
 {% block content %}
     <h1 class="mb-4">Видео пользователей</h1>
     <div class="row">
-        {% for post in posts %}
+        {% for video in videos %}
         <!-- Карточка одоного поста пользователей -->
-        <div class="col-md-6">
+        <div class="container">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">{{ post.text }}</p>
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <video id="file_name" width="100%" height="auto" controls>
+                        <source src="/static/uploads/{{ video.file_name }}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+                    </video>
+                    <p class="card-text">{{ video.text }}</p>
                     <div class="row">
                         <div class="col-6">
-                            <p class="card-text text-secondary">Дата публикации: {{ post.at_publish }}</p>
+                            <p class="card-text text-secondary">Дата публикации: {{ video.at_publish }}</p>
                         </div>
                         <div class="col-6 text-end">
-                            <a href="/profile/{{ post.author_id }}" class="card-text">Автор: {{ post.author_username }}</a>
+                            <a href="/profile/{{ video.author_id }}" class="card-text">Автор: {{ video.author_username }}</a>
                         </div>
                     </div>
                 </div>
