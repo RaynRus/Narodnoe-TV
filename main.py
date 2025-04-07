@@ -70,7 +70,16 @@ def profile_page():
         return redirect('/profile')
 @app.route("/profile/<int:id>")
 def unknow_profile_page(id):
-    pass
+    username = session.get("username")
+
+    user = User.get_user_by_username(username)
+
+    if not username:
+        return redirect("/login")
+    author = User.get_user_by_id(id)
+
+    videos = Video.get_by_author(author.id)
+    return render_template("videoCreatorProfile.html", user=user, author=author, videos=videos)
 
 
 @app.route("/login", methods=["POST", "GET"])

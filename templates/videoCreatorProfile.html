@@ -1,0 +1,42 @@
+<!-- Подключение базового шаблона -->
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-8">
+        <div class="card mt-5">
+            <div class="card-header">
+                Профиль пользователя
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Имя пользователя: {{ author.username }}</h5>
+                <p class="card-text">Количество видео: {{ video|length }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-8">
+        <h2 class="mb-3">Видео</h2>
+        <!-- Список карточек публикаций -->
+
+        {% for video in videos %}
+        <!-- Карточка одоного видео пользователя -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <video id="file_name" width="100%" height="auto" controls>
+                        <source src="/static/uploads/{{ video.file_name }}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+                    </video>
+                    <p class="card-text">{{ video.text }}</p>
+                    <p class="card-text text-fsecondary"> Дата публикации: {{ video.at_publish }}</p>
+                </div>
+            </div>
+        <!-- таких карточек много... -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
